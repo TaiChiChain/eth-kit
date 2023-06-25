@@ -1,4 +1,4 @@
-// Copyright 2017 The go-ethereum Authors
+// Copyright 2022 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
 // The go-ethereum library is free software: you can redistribute it and/or modify
@@ -14,24 +14,22 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
-//go:build gofuzz
-// +build gofuzz
+package vm
 
-package runtime
+import (
+	"testing"
 
-// Fuzz is the basic entry point for the go-fuzz tool
-//
-// This returns 1 for valid parsable/runable code, 0
-// for invalid opcode.
-func Fuzz(input []byte) int {
-	_, _, err := Execute(input, input, &Config{
-		GasLimit: 3000000,
-	})
+	"github.com/stretchr/testify/require"
+)
 
-	// invalid opcode
-	if err != nil && len(err.Error()) > 6 && string(err.Error()[:7]) == "invalid" {
-		return 0
-	}
+// TestJumpTableCopy tests that deep copy is necessery to prevent modify shared jump table
+func TestJumpTableCopy(t *testing.T) {
+	tbl := newMergeInstructionSet()
+	require.Equal(t, uint64(0), tbl[SLOAD].constantGas)
 
-	return 1
+	// a deep copy won't modify the shared jump table
+	deepCopy := copyJumpTable(&tbl)
+	deepCopy[SLOAD].constantGas = 100
+	require.Equal(t, uint64(100), deepCopy[SLOAD].constantGas)
+	require.Equal(t, uint64(0), tbl[SLOAD].constantGas)
 }
