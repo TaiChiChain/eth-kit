@@ -168,7 +168,7 @@ func (e *EthTransaction) GetValue() *big.Int {
 }
 
 func (e *EthTransaction) GetTimeStamp() int64 {
-	return e.Time.UnixNano()
+	return e.Time.Unix()
 }
 
 func (e *EthTransaction) GetHash() *types.Hash {
