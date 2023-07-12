@@ -1,3 +1,19 @@
+// Copyright 2016 The go-ethereum Authors
+// This file is part of the go-ethereum library.
+//
+// The go-ethereum library is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The go-ethereum library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+
 package vm
 
 import (
@@ -15,36 +31,31 @@ type ChainContext interface {
 	// Engine retrieves the chain's consensus engine.
 	Engine() consensus.Engine
 
-	// GetHeader returns the hash corresponding to their hash.
+	// GetHeader returns the header corresponding to the hash/number argument pair.
 	GetHeader(common.Hash, uint64) *types.Header
 }
 
 // NewEVMBlockContext creates a new context for use in the EVM.
 func NewEVMBlockContext(number uint64, timestamp uint64, db ledger.StateDB, ledger ledger.ChainLedger, admin string) BlockContext {
-	// If we don't have an explicit author (i.e. not mining), extract from the header
-	// var beneficiary common.Address
-	// if author == nil {
-	// 	beneficiary, _ = chain.Engine().Author(header) // Ignore error, we're past header validation
-	// } else {
-	// 	beneficiary = *author
-	// }
 	return BlockContext{
 		CanTransfer: CanTransfer,
 		Transfer:    Transfer,
 		GetHash:     GetHashFn(ledger),
 		Coinbase:    common.HexToAddress(admin),
 		BlockNumber: new(big.Int).SetUint64(number),
-		Time:        new(big.Int).SetUint64(timestamp),
+		Time:        timestamp / (1000 * 1000 * 1000),
 		Difficulty:  big.NewInt(0x2000),
+		BaseFee:     big.NewInt(0),
 		GasLimit:    0x2fefd8,
+		// Random:      random,
 	}
 }
 
 // NewEVMTxContext creates a new transaction context for a single transaction.
-func NewEVMTxContext(msg types.Message) TxContext {
+func NewEVMTxContext(msg *Message) TxContext {
 	return TxContext{
-		Origin:   msg.From(),
-		GasPrice: new(big.Int).Set(msg.GasPrice()),
+		Origin:   msg.From,
+		GasPrice: new(big.Int).Set(msg.GasPrice),
 	}
 }
 

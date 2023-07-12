@@ -6,6 +6,7 @@ import (
 )
 
 // BlockchainLedger handles block, transaction and receipt data.
+//
 //go:generate mockgen -destination mock_ledger/mock_chain_ledger.go -package mock_ledger -source chain_ledger.go
 type ChainLedger interface {
 	// PutBlock put block into store

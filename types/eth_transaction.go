@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
-	etherTypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/meshplus/bitxhub-kit/hexutil"
 	"github.com/meshplus/bitxhub-kit/types"
 	"github.com/meshplus/bitxhub-model/pb"
+	vm "github.com/meshplus/eth-kit/evm"
 )
 
 var _ pb.Transaction = (*EthTransaction)(nil)
@@ -480,28 +480,37 @@ func (e *EthTransaction) FromCallArgs(callArgs CallArgs) {
 	e.Inner = inner
 }
 
-func (tx *EthTransaction) ToMessage() etherTypes.Message {
+func (tx *EthTransaction) ToMessage() *vm.Message {
 	from := common.BytesToAddress(tx.GetFrom().Bytes())
 	var to *common.Address
 	if tx.GetTo() != nil {
 		toAddr := common.BytesToAddress(tx.GetTo().Bytes())
 		to = &toAddr
 	}
-	nonce := tx.GetNonce()
-	amount := tx.GetValue()
-	gas := tx.GetGas()
-	gasPrice := new(big.Int).Set(tx.GetGasPrice())
-	gasFeeCap := new(big.Int).Set(tx.GetGasFeeCap())
-	gasTipCap := new(big.Int).Set(tx.GetGasTipCap())
-	data := tx.GetPayload()
-	accessList := tx.GetInner().GetAccessList()
 
 	isFake := false
 	if v, _, _ := tx.GetRawSignature(); v == nil {
 		isFake = true
 	}
 
-	return etherTypes.NewMessage(from, to, nonce, amount, gas, gasPrice, gasFeeCap, gasTipCap, data, accessList, isFake)
+	msg := &vm.Message{
+		Nonce:             tx.GetNonce(),
+		GasLimit:          tx.GetGas(),
+		GasPrice:          new(big.Int).Set(tx.GetGasPrice()),
+		GasFeeCap:         new(big.Int).Set(tx.GetGasFeeCap()),
+		GasTipCap:         new(big.Int).Set(tx.GetGasTipCap()),
+		From:              from,
+		To:                to,
+		Value:             tx.GetValue(),
+		Data:              tx.GetPayload(),
+		AccessList:        tx.GetInner().GetAccessList(),
+		SkipAccountChecks: isFake,
+	}
+	// If baseFee provided, set gasPrice to effectiveGasPrice.
+	// if baseFee != nil {
+	// 	msg.GasPrice = cmath.BigMin(msg.GasPrice.Add(msg.GasTipCap, baseFee), msg.GasFeeCap)
+	// }
+	return msg
 }
 
 func (tx *EthTransaction) MarshalJSON() ([]byte, error) {

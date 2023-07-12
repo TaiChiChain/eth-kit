@@ -5,6 +5,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	types2 "github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/params"
 	"github.com/meshplus/bitxhub-kit/types"
 	"github.com/meshplus/bitxhub-model/pb"
 )
@@ -87,6 +88,9 @@ type StateAccessor interface {
 	// FlushDirtyData flushes the dirty data
 	FlushDirtyData() (map[string]IAccount, *types.Hash)
 
+	// Set tx context for state db
+	SetTxContext(thash *types.Hash, txIndex int)
+
 	// Clear
 	Clear()
 }
@@ -153,6 +157,9 @@ type StateDB interface {
 	GetEVMState(common.Address, common.Hash) common.Hash
 	SetEVMState(common.Address, common.Hash, common.Hash)
 
+	GetEVMTransientState(addr common.Address, key common.Hash) common.Hash
+	SetEVMTransientState(addr common.Address, key, value common.Hash)
+
 	SuisideEVM(common.Address) bool
 	HasSuisideEVM(common.Address) bool
 
@@ -163,7 +170,7 @@ type StateDB interface {
 	// is defined according to EIP161 (balance = nonce = code = 0).
 	EmptyEVM(common.Address) bool
 
-	PrepareEVMAccessList(sender common.Address, dest *common.Address, precompiles []common.Address, txAccesses types2.AccessList)
+	// PrepareEVMAccessList(sender common.Address, dest *common.Address, precompiles []common.Address, txAccesses types2.AccessList)
 	AddressInEVMAccessList(addr common.Address) bool
 	SlotInEVMAceessList(addr common.Address, slot common.Hash) (addressOk bool, slotOk bool)
 	// AddAddressToAccessList adds the given address to the access list. This operation is safe to perform
@@ -172,13 +179,11 @@ type StateDB interface {
 	// AddSlotToAccessList adds the given (address,slot) to the access list. This operation is safe to perform
 	// even if the feature/fork is not active yet
 	AddSlotToEVMAccessList(addr common.Address, slot common.Hash)
+	PrepareEVM(rules params.Rules, sender, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses types2.AccessList)
 
 	RevertToSnapshot(int)
 	Snapshot() int
 
 	AddEVMLog(log *types2.Log)
 	AddEVMPreimage(common.Hash, []byte)
-
-	//GetBlockEVMHash(uint64) common.Hash
-	PrepareEVM(common.Hash, int)
 }
