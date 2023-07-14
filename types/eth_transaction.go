@@ -537,3 +537,39 @@ func (tx *EthTransaction) MarshalJSON() ([]byte, error) {
 
 	return json.Marshal(jsonM)
 }
+
+func (tx *EthTransaction) RbftGetSize() int {
+	return tx.Size()
+}
+
+func (tx *EthTransaction) RbftGetData() []byte {
+	return tx.Inner.GetData()
+}
+
+func (tx *EthTransaction) RbftIsConfigTx() bool {
+	return false
+}
+
+func (tx *EthTransaction) RbftGetTxHash() string {
+	return tx.GetHash().String()
+}
+
+func (tx *EthTransaction) RbftGetFrom() string {
+	return tx.GetFrom().String()
+}
+
+func (tx *EthTransaction) RbftGetTimeStamp() int64 {
+	return tx.GetTimeStamp()
+}
+
+func (tx *EthTransaction) RbftGetNonce() uint64 {
+	return tx.GetNonce()
+}
+
+func (tx *EthTransaction) RbftUnmarshal(raw []byte) error {
+	return tx.UnmarshalBinary(raw)
+}
+
+func (tx *EthTransaction) RbftMarshal() ([]byte, error) {
+	return tx.MarshalBinary()
+}
