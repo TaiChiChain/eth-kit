@@ -43,11 +43,11 @@ func NewEVMBlockContext(number uint64, timestamp uint64, db ledger.StateDB, ledg
 		GetHash:     GetHashFn(ledger),
 		Coinbase:    common.HexToAddress(admin),
 		BlockNumber: new(big.Int).SetUint64(number),
-		Time:        timestamp / (1000 * 1000 * 1000),
+		Time:        timestamp,
 		Difficulty:  big.NewInt(0x2000),
 		BaseFee:     big.NewInt(0),
 		GasLimit:    0x2fefd8,
-		// Random:      random,
+		Random:      &common.Hash{},
 	}
 }
 
