@@ -3,15 +3,15 @@ module github.com/meshplus/eth-kit
 go 1.19
 
 replace (
-	github.com/meshplus/bitxhub-kit => github.com/TaiChiChain/bitxhub-kit v1.20.1-0.20230625064843-b7ae66571e52
-	github.com/meshplus/bitxhub-model => github.com/TaiChiChain/bitxhub-model v1.20.2-0.20230625065636-b5b1ab540d61
+	github.com/meshplus/bitxhub-kit => github.com/TaiChiChain/bitxhub-kit v0.0.1
+	github.com/meshplus/bitxhub-model => github.com/TaiChiChain/bitxhub-model v0.0.1
 )
 
 require (
 	github.com/ethereum/go-ethereum v1.12.0
-	github.com/holiman/uint256 v1.2.2-0.20230321075855-87b91420868c
+	github.com/holiman/uint256 v1.2.2
 	github.com/meshplus/bitxhub-kit v1.2.1-0.20210902085548-07f4fa85bfc9
-	github.com/meshplus/bitxhub-model v1.2.1-0.20210805020100-41c27414badf
+	github.com/meshplus/bitxhub-model v0.0.1
 	github.com/stretchr/testify v1.8.1
 	golang.org/x/crypto v0.1.0
 )
