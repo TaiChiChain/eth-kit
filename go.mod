@@ -9,6 +9,7 @@ replace (
 
 require (
 	github.com/ethereum/go-ethereum v1.12.0
+	github.com/golang/mock v1.1.1
 	github.com/holiman/uint256 v1.2.2
 	github.com/meshplus/bitxhub-kit v1.2.1-0.20210902085548-07f4fa85bfc9
 	github.com/meshplus/bitxhub-model v0.0.1
