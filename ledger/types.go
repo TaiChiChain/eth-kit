@@ -7,7 +7,6 @@ import (
 	types2 "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/meshplus/bitxhub-kit/types"
-	"github.com/meshplus/bitxhub-model/pb"
 )
 
 //go:generate mockgen -destination mock_ledger/mock_state_ledger.go -package mock_ledger -source types.go
@@ -17,14 +16,14 @@ type StateLedger interface {
 	StateDB
 
 	// AddEvent
-	AddEvent(*pb.Event)
+	AddEvent(*types.Event)
 
 	// Events
-	Events(txHash string) []*pb.Event
+	Events(txHash string) []*types.Event
 
-	AddLog(log *pb.EvmLog)
+	AddLog(log *types.EvmLog)
 
-	GetLogs(types.Hash) []*pb.EvmLog
+	GetLogs(types.Hash) []*types.EvmLog
 
 	// Rollback
 	RollbackState(height uint64) error
