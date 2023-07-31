@@ -1,7 +1,7 @@
 package ledger
 
 import (
-	"github.com/meshplus/bitxhub-kit/types"
+	"github.com/axiomesh/axiom-kit/types"
 )
 
 // BlockchainLedger handles block, transaction and receipt data.

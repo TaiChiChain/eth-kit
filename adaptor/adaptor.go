@@ -4,10 +4,10 @@ import (
 	"errors"
 	"math/big"
 
+	"github.com/axiomesh/axiom-kit/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/math"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/meshplus/bitxhub-kit/types"
 	vm "github.com/meshplus/eth-kit/evm"
 )
 

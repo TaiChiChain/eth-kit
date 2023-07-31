@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	types "github.com/meshplus/bitxhub-kit/types"
+	types "github.com/axiomesh/axiom-kit/types"
 )
 
 // MockChainLedger is a mock of ChainLedger interface.

@@ -1,6 +1,6 @@
 package ledger
 
-import "github.com/meshplus/bitxhub-kit/types"
+import "github.com/axiomesh/axiom-kit/types"
 
 type AccessTupleList []AccessTuple
 
