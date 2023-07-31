@@ -66,7 +66,7 @@ func GetHashFn(ledger ledger.ChainLedger) func(n uint64) common.Hash {
 		if hash == nil {
 			return common.Hash{}
 		}
-		return common.BytesToHash(hash.RawHash[:])
+		return common.BytesToHash(hash.Bytes())
 	}
 }
 
