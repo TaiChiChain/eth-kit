@@ -7,8 +7,8 @@ package mock_ledger
 import (
 	reflect "reflect"
 
-	gomock "github.com/golang/mock/gomock"
 	types "github.com/axiomesh/axiom-kit/types"
+	gomock "github.com/golang/mock/gomock"
 )
 
 // MockChainLedger is a mock of ChainLedger interface.
