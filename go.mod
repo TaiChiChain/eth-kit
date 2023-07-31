@@ -1,4 +1,4 @@
-module github.com/meshplus/eth-kit
+module github.com/axiomesh/eth-kit
 
 go 1.20
 

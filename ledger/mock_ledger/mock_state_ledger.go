@@ -8,12 +8,12 @@ import (
 	big "math/big"
 	reflect "reflect"
 
+	types "github.com/axiomesh/axiom-kit/types"
+	ledger "github.com/axiomesh/eth-kit/ledger"
 	common "github.com/ethereum/go-ethereum/common"
-	types "github.com/ethereum/go-ethereum/core/types"
+	types0 "github.com/ethereum/go-ethereum/core/types"
 	params "github.com/ethereum/go-ethereum/params"
 	gomock "github.com/golang/mock/gomock"
-	types0 "github.com/axiomesh/axiom-kit/types"
-	ledger "github.com/meshplus/eth-kit/ledger"
 )
 
 // MockStateLedger is a mock of StateLedger interface.
@@ -64,7 +64,7 @@ func (mr *MockStateLedgerMockRecorder) AddEVMBalance(arg0, arg1 interface{}) *go
 }
 
 // AddEVMLog mocks base method.
-func (m *MockStateLedger) AddEVMLog(log *types.Log) {
+func (m *MockStateLedger) AddEVMLog(log *types0.Log) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddEVMLog", log)
 }
@@ -100,7 +100,7 @@ func (mr *MockStateLedgerMockRecorder) AddEVMRefund(arg0 interface{}) *gomock.Ca
 }
 
 // AddEvent mocks base method.
-func (m *MockStateLedger) AddEvent(arg0 *types0.Event) {
+func (m *MockStateLedger) AddEvent(arg0 *types.Event) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddEvent", arg0)
 }
@@ -112,7 +112,7 @@ func (mr *MockStateLedgerMockRecorder) AddEvent(arg0 interface{}) *gomock.Call {
 }
 
 // AddLog mocks base method.
-func (m *MockStateLedger) AddLog(log *types0.EvmLog) {
+func (m *MockStateLedger) AddLog(log *types.EvmLog) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddLog", log)
 }
@@ -136,7 +136,7 @@ func (mr *MockStateLedgerMockRecorder) AddSlotToEVMAccessList(addr, slot interfa
 }
 
 // AddState mocks base method.
-func (m *MockStateLedger) AddState(arg0 *types0.Address, arg1, arg2 []byte) {
+func (m *MockStateLedger) AddState(arg0 *types.Address, arg1, arg2 []byte) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddState", arg0, arg1, arg2)
 }
@@ -198,7 +198,7 @@ func (mr *MockStateLedgerMockRecorder) Close() *gomock.Call {
 }
 
 // Commit mocks base method.
-func (m *MockStateLedger) Commit(height uint64, accounts map[string]ledger.IAccount, stateRoot *types0.Hash) error {
+func (m *MockStateLedger) Commit(height uint64, accounts map[string]ledger.IAccount, stateRoot *types.Hash) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Commit", height, accounts, stateRoot)
 	ret0, _ := ret[0].(error)
@@ -252,10 +252,10 @@ func (mr *MockStateLedgerMockRecorder) EmptyEVM(arg0 interface{}) *gomock.Call {
 }
 
 // Events mocks base method.
-func (m *MockStateLedger) Events(txHash string) []*types0.Event {
+func (m *MockStateLedger) Events(txHash string) []*types.Event {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Events", txHash)
-	ret0, _ := ret[0].([]*types0.Event)
+	ret0, _ := ret[0].([]*types.Event)
 	return ret0
 }
 
@@ -292,11 +292,11 @@ func (mr *MockStateLedgerMockRecorder) Finalise(arg0 interface{}) *gomock.Call {
 }
 
 // FlushDirtyData mocks base method.
-func (m *MockStateLedger) FlushDirtyData() (map[string]ledger.IAccount, *types0.Hash) {
+func (m *MockStateLedger) FlushDirtyData() (map[string]ledger.IAccount, *types.Hash) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FlushDirtyData")
 	ret0, _ := ret[0].(map[string]ledger.IAccount)
-	ret1, _ := ret[1].(*types0.Hash)
+	ret1, _ := ret[1].(*types.Hash)
 	return ret0, ret1
 }
 
@@ -307,7 +307,7 @@ func (mr *MockStateLedgerMockRecorder) FlushDirtyData() *gomock.Call {
 }
 
 // GetAccount mocks base method.
-func (m *MockStateLedger) GetAccount(arg0 *types0.Address) ledger.IAccount {
+func (m *MockStateLedger) GetAccount(arg0 *types.Address) ledger.IAccount {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccount", arg0)
 	ret0, _ := ret[0].(ledger.IAccount)
@@ -321,7 +321,7 @@ func (mr *MockStateLedgerMockRecorder) GetAccount(arg0 interface{}) *gomock.Call
 }
 
 // GetBalance mocks base method.
-func (m *MockStateLedger) GetBalance(arg0 *types0.Address) *big.Int {
+func (m *MockStateLedger) GetBalance(arg0 *types.Address) *big.Int {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBalance", arg0)
 	ret0, _ := ret[0].(*big.Int)
@@ -335,7 +335,7 @@ func (mr *MockStateLedgerMockRecorder) GetBalance(arg0 interface{}) *gomock.Call
 }
 
 // GetCode mocks base method.
-func (m *MockStateLedger) GetCode(arg0 *types0.Address) []byte {
+func (m *MockStateLedger) GetCode(arg0 *types.Address) []byte {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetCode", arg0)
 	ret0, _ := ret[0].([]byte)
@@ -475,10 +475,10 @@ func (mr *MockStateLedgerMockRecorder) GetEVMTransientState(addr, key interface{
 }
 
 // GetLogs mocks base method.
-func (m *MockStateLedger) GetLogs(arg0 types0.Hash) []*types0.EvmLog {
+func (m *MockStateLedger) GetLogs(arg0 types.Hash) []*types.EvmLog {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetLogs", arg0)
-	ret0, _ := ret[0].([]*types0.EvmLog)
+	ret0, _ := ret[0].([]*types.EvmLog)
 	return ret0
 }
 
@@ -489,7 +489,7 @@ func (mr *MockStateLedgerMockRecorder) GetLogs(arg0 interface{}) *gomock.Call {
 }
 
 // GetNonce mocks base method.
-func (m *MockStateLedger) GetNonce(arg0 *types0.Address) uint64 {
+func (m *MockStateLedger) GetNonce(arg0 *types.Address) uint64 {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetNonce", arg0)
 	ret0, _ := ret[0].(uint64)
@@ -503,7 +503,7 @@ func (mr *MockStateLedgerMockRecorder) GetNonce(arg0 interface{}) *gomock.Call {
 }
 
 // GetOrCreateAccount mocks base method.
-func (m *MockStateLedger) GetOrCreateAccount(arg0 *types0.Address) ledger.IAccount {
+func (m *MockStateLedger) GetOrCreateAccount(arg0 *types.Address) ledger.IAccount {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrCreateAccount", arg0)
 	ret0, _ := ret[0].(ledger.IAccount)
@@ -517,7 +517,7 @@ func (mr *MockStateLedgerMockRecorder) GetOrCreateAccount(arg0 interface{}) *gom
 }
 
 // GetState mocks base method.
-func (m *MockStateLedger) GetState(arg0 *types0.Address, arg1 []byte) (bool, []byte) {
+func (m *MockStateLedger) GetState(arg0 *types.Address, arg1 []byte) (bool, []byte) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetState", arg0, arg1)
 	ret0, _ := ret[0].(bool)
@@ -546,7 +546,7 @@ func (mr *MockStateLedgerMockRecorder) HasSuisideEVM(arg0 interface{}) *gomock.C
 }
 
 // PrepareBlock mocks base method.
-func (m *MockStateLedger) PrepareBlock(arg0 *types0.Hash, arg1 uint64) {
+func (m *MockStateLedger) PrepareBlock(arg0 *types.Hash, arg1 uint64) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "PrepareBlock", arg0, arg1)
 }
@@ -558,7 +558,7 @@ func (mr *MockStateLedgerMockRecorder) PrepareBlock(arg0, arg1 interface{}) *gom
 }
 
 // PrepareEVM mocks base method.
-func (m *MockStateLedger) PrepareEVM(rules params.Rules, sender, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses types.AccessList) {
+func (m *MockStateLedger) PrepareEVM(rules params.Rules, sender, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses types0.AccessList) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "PrepareEVM", rules, sender, coinbase, dest, precompiles, txAccesses)
 }
@@ -570,7 +570,7 @@ func (mr *MockStateLedgerMockRecorder) PrepareEVM(rules, sender, coinbase, dest,
 }
 
 // QueryByPrefix mocks base method.
-func (m *MockStateLedger) QueryByPrefix(address *types0.Address, prefix string) (bool, [][]byte) {
+func (m *MockStateLedger) QueryByPrefix(address *types.Address, prefix string) (bool, [][]byte) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryByPrefix", address, prefix)
 	ret0, _ := ret[0].(bool)
@@ -611,7 +611,7 @@ func (mr *MockStateLedgerMockRecorder) RollbackState(height interface{}) *gomock
 }
 
 // SetBalance mocks base method.
-func (m *MockStateLedger) SetBalance(arg0 *types0.Address, arg1 *big.Int) {
+func (m *MockStateLedger) SetBalance(arg0 *types.Address, arg1 *big.Int) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetBalance", arg0, arg1)
 }
@@ -623,7 +623,7 @@ func (mr *MockStateLedgerMockRecorder) SetBalance(arg0, arg1 interface{}) *gomoc
 }
 
 // SetCode mocks base method.
-func (m *MockStateLedger) SetCode(arg0 *types0.Address, arg1 []byte) {
+func (m *MockStateLedger) SetCode(arg0 *types.Address, arg1 []byte) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetCode", arg0, arg1)
 }
@@ -683,7 +683,7 @@ func (mr *MockStateLedgerMockRecorder) SetEVMTransientState(addr, key, value int
 }
 
 // SetNonce mocks base method.
-func (m *MockStateLedger) SetNonce(arg0 *types0.Address, arg1 uint64) {
+func (m *MockStateLedger) SetNonce(arg0 *types.Address, arg1 uint64) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetNonce", arg0, arg1)
 }
@@ -695,7 +695,7 @@ func (mr *MockStateLedgerMockRecorder) SetNonce(arg0, arg1 interface{}) *gomock.
 }
 
 // SetState mocks base method.
-func (m *MockStateLedger) SetState(arg0 *types0.Address, arg1, arg2 []byte) {
+func (m *MockStateLedger) SetState(arg0 *types.Address, arg1, arg2 []byte) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetState", arg0, arg1, arg2)
 }
@@ -707,7 +707,7 @@ func (mr *MockStateLedgerMockRecorder) SetState(arg0, arg1, arg2 interface{}) *g
 }
 
 // SetTxContext mocks base method.
-func (m *MockStateLedger) SetTxContext(thash *types0.Hash, txIndex int) {
+func (m *MockStateLedger) SetTxContext(thash *types.Hash, txIndex int) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetTxContext", thash, txIndex)
 }
@@ -823,7 +823,7 @@ func (m *MockStateAccessor) EXPECT() *MockStateAccessorMockRecorder {
 }
 
 // AddState mocks base method.
-func (m *MockStateAccessor) AddState(arg0 *types0.Address, arg1, arg2 []byte) {
+func (m *MockStateAccessor) AddState(arg0 *types.Address, arg1, arg2 []byte) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddState", arg0, arg1, arg2)
 }
@@ -847,7 +847,7 @@ func (mr *MockStateAccessorMockRecorder) Clear() *gomock.Call {
 }
 
 // Commit mocks base method.
-func (m *MockStateAccessor) Commit(height uint64, accounts map[string]ledger.IAccount, stateRoot *types0.Hash) error {
+func (m *MockStateAccessor) Commit(height uint64, accounts map[string]ledger.IAccount, stateRoot *types.Hash) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Commit", height, accounts, stateRoot)
 	ret0, _ := ret[0].(error)
@@ -861,11 +861,11 @@ func (mr *MockStateAccessorMockRecorder) Commit(height, accounts, stateRoot inte
 }
 
 // FlushDirtyData mocks base method.
-func (m *MockStateAccessor) FlushDirtyData() (map[string]ledger.IAccount, *types0.Hash) {
+func (m *MockStateAccessor) FlushDirtyData() (map[string]ledger.IAccount, *types.Hash) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FlushDirtyData")
 	ret0, _ := ret[0].(map[string]ledger.IAccount)
-	ret1, _ := ret[1].(*types0.Hash)
+	ret1, _ := ret[1].(*types.Hash)
 	return ret0, ret1
 }
 
@@ -876,7 +876,7 @@ func (mr *MockStateAccessorMockRecorder) FlushDirtyData() *gomock.Call {
 }
 
 // GetAccount mocks base method.
-func (m *MockStateAccessor) GetAccount(arg0 *types0.Address) ledger.IAccount {
+func (m *MockStateAccessor) GetAccount(arg0 *types.Address) ledger.IAccount {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAccount", arg0)
 	ret0, _ := ret[0].(ledger.IAccount)
@@ -890,7 +890,7 @@ func (mr *MockStateAccessorMockRecorder) GetAccount(arg0 interface{}) *gomock.Ca
 }
 
 // GetBalance mocks base method.
-func (m *MockStateAccessor) GetBalance(arg0 *types0.Address) *big.Int {
+func (m *MockStateAccessor) GetBalance(arg0 *types.Address) *big.Int {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBalance", arg0)
 	ret0, _ := ret[0].(*big.Int)
@@ -904,7 +904,7 @@ func (mr *MockStateAccessorMockRecorder) GetBalance(arg0 interface{}) *gomock.Ca
 }
 
 // GetCode mocks base method.
-func (m *MockStateAccessor) GetCode(arg0 *types0.Address) []byte {
+func (m *MockStateAccessor) GetCode(arg0 *types.Address) []byte {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetCode", arg0)
 	ret0, _ := ret[0].([]byte)
@@ -918,7 +918,7 @@ func (mr *MockStateAccessorMockRecorder) GetCode(arg0 interface{}) *gomock.Call 
 }
 
 // GetNonce mocks base method.
-func (m *MockStateAccessor) GetNonce(arg0 *types0.Address) uint64 {
+func (m *MockStateAccessor) GetNonce(arg0 *types.Address) uint64 {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetNonce", arg0)
 	ret0, _ := ret[0].(uint64)
@@ -932,7 +932,7 @@ func (mr *MockStateAccessorMockRecorder) GetNonce(arg0 interface{}) *gomock.Call
 }
 
 // GetOrCreateAccount mocks base method.
-func (m *MockStateAccessor) GetOrCreateAccount(arg0 *types0.Address) ledger.IAccount {
+func (m *MockStateAccessor) GetOrCreateAccount(arg0 *types.Address) ledger.IAccount {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOrCreateAccount", arg0)
 	ret0, _ := ret[0].(ledger.IAccount)
@@ -946,7 +946,7 @@ func (mr *MockStateAccessorMockRecorder) GetOrCreateAccount(arg0 interface{}) *g
 }
 
 // GetState mocks base method.
-func (m *MockStateAccessor) GetState(arg0 *types0.Address, arg1 []byte) (bool, []byte) {
+func (m *MockStateAccessor) GetState(arg0 *types.Address, arg1 []byte) (bool, []byte) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetState", arg0, arg1)
 	ret0, _ := ret[0].(bool)
@@ -961,7 +961,7 @@ func (mr *MockStateAccessorMockRecorder) GetState(arg0, arg1 interface{}) *gomoc
 }
 
 // QueryByPrefix mocks base method.
-func (m *MockStateAccessor) QueryByPrefix(address *types0.Address, prefix string) (bool, [][]byte) {
+func (m *MockStateAccessor) QueryByPrefix(address *types.Address, prefix string) (bool, [][]byte) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "QueryByPrefix", address, prefix)
 	ret0, _ := ret[0].(bool)
@@ -976,7 +976,7 @@ func (mr *MockStateAccessorMockRecorder) QueryByPrefix(address, prefix interface
 }
 
 // SetBalance mocks base method.
-func (m *MockStateAccessor) SetBalance(arg0 *types0.Address, arg1 *big.Int) {
+func (m *MockStateAccessor) SetBalance(arg0 *types.Address, arg1 *big.Int) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetBalance", arg0, arg1)
 }
@@ -988,7 +988,7 @@ func (mr *MockStateAccessorMockRecorder) SetBalance(arg0, arg1 interface{}) *gom
 }
 
 // SetCode mocks base method.
-func (m *MockStateAccessor) SetCode(arg0 *types0.Address, arg1 []byte) {
+func (m *MockStateAccessor) SetCode(arg0 *types.Address, arg1 []byte) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetCode", arg0, arg1)
 }
@@ -1000,7 +1000,7 @@ func (mr *MockStateAccessorMockRecorder) SetCode(arg0, arg1 interface{}) *gomock
 }
 
 // SetNonce mocks base method.
-func (m *MockStateAccessor) SetNonce(arg0 *types0.Address, arg1 uint64) {
+func (m *MockStateAccessor) SetNonce(arg0 *types.Address, arg1 uint64) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetNonce", arg0, arg1)
 }
@@ -1012,7 +1012,7 @@ func (mr *MockStateAccessorMockRecorder) SetNonce(arg0, arg1 interface{}) *gomoc
 }
 
 // SetState mocks base method.
-func (m *MockStateAccessor) SetState(arg0 *types0.Address, arg1, arg2 []byte) {
+func (m *MockStateAccessor) SetState(arg0 *types.Address, arg1, arg2 []byte) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetState", arg0, arg1, arg2)
 }
@@ -1024,7 +1024,7 @@ func (mr *MockStateAccessorMockRecorder) SetState(arg0, arg1, arg2 interface{}) 
 }
 
 // SetTxContext mocks base method.
-func (m *MockStateAccessor) SetTxContext(thash *types0.Hash, txIndex int) {
+func (m *MockStateAccessor) SetTxContext(thash *types.Hash, txIndex int) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "SetTxContext", thash, txIndex)
 }
@@ -1111,10 +1111,10 @@ func (mr *MockIAccountMockRecorder) CodeHash() *gomock.Call {
 }
 
 // GetAddress mocks base method.
-func (m *MockIAccount) GetAddress() *types0.Address {
+func (m *MockIAccount) GetAddress() *types.Address {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAddress")
-	ret0, _ := ret[0].(*types0.Address)
+	ret0, _ := ret[0].(*types.Address)
 	return ret0
 }
 
@@ -1344,7 +1344,7 @@ func (mr *MockStateDBMockRecorder) AddEVMBalance(arg0, arg1 interface{}) *gomock
 }
 
 // AddEVMLog mocks base method.
-func (m *MockStateDB) AddEVMLog(log *types.Log) {
+func (m *MockStateDB) AddEVMLog(log *types0.Log) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "AddEVMLog", log)
 }
@@ -1586,7 +1586,7 @@ func (mr *MockStateDBMockRecorder) HasSuisideEVM(arg0 interface{}) *gomock.Call 
 }
 
 // PrepareEVM mocks base method.
-func (m *MockStateDB) PrepareEVM(rules params.Rules, sender, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses types.AccessList) {
+func (m *MockStateDB) PrepareEVM(rules params.Rules, sender, coinbase common.Address, dest *common.Address, precompiles []common.Address, txAccesses types0.AccessList) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "PrepareEVM", rules, sender, coinbase, dest, precompiles, txAccesses)
 }
