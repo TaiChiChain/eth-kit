@@ -12,7 +12,7 @@ import (
 	types "github.com/ethereum/go-ethereum/core/types"
 	params "github.com/ethereum/go-ethereum/params"
 	gomock "github.com/golang/mock/gomock"
-	types0 "github.com/meshplus/bitxhub-kit/types"
+	types0 "github.com/axiomesh/axiom-kit/types"
 	ledger "github.com/meshplus/eth-kit/ledger"
 )
 

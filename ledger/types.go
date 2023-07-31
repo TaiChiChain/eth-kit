@@ -3,10 +3,10 @@ package ledger
 import (
 	"math/big"
 
+	"github.com/axiomesh/axiom-kit/types"
 	"github.com/ethereum/go-ethereum/common"
 	types2 "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
-	"github.com/meshplus/bitxhub-kit/types"
 )
 
 //go:generate mockgen -destination mock_ledger/mock_state_ledger.go -package mock_ledger -source types.go
