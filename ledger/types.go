@@ -23,7 +23,7 @@ type StateLedger interface {
 
 	AddLog(log *types.EvmLog)
 
-	GetLogs(types.Hash) []*types.EvmLog
+	GetLogs(types.Hash, uint64, *types.Hash) []*types.EvmLog
 
 	// Rollback
 	RollbackState(height uint64) error
