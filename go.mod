@@ -5,9 +5,9 @@ go 1.20
 require (
 	github.com/axiomesh/axiom-kit v0.0.2-0.20230731140325-e1c65a89cd36
 	github.com/ethereum/go-ethereum v1.12.0
-	github.com/golang/mock v1.6.0
 	github.com/holiman/uint256 v1.2.3
 	github.com/stretchr/testify v1.8.4
+	go.uber.org/mock v0.2.0
 	golang.org/x/crypto v0.11.0
 )
 

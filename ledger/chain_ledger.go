@@ -4,9 +4,9 @@ import (
 	"github.com/axiomesh/axiom-kit/types"
 )
 
-// BlockchainLedger handles block, transaction and receipt data.
+// ChainLedger handles block, transaction and receipt data.
 //
-//go:generate mockgen -destination mock_ledger/mock_chain_ledger.go -package mock_ledger -source chain_ledger.go
+//go:generate mockgen -destination mock_ledger/mock_chain_ledger.go -package mock_ledger -source chain_ledger.go -typed
 type ChainLedger interface {
 	// GetBlock get block with height
 	GetBlock(height uint64) (*types.Block, error)
@@ -38,7 +38,7 @@ type ChainLedger interface {
 	// LoadChainMeta get chain meta data
 	LoadChainMeta() (*types.ChainMeta, error)
 
-	// GetTxCountInBlock get the transaction count in a block
+	// GetTransactionCount get the transaction count in a block
 	GetTransactionCount(height uint64) (uint64, error)
 
 	RollbackBlockChain(height uint64) error
