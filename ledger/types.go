@@ -9,7 +9,7 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 )
 
-//go:generate mockgen -destination mock_ledger/mock_state_ledger.go -package mock_ledger -source types.go
+//go:generate mockgen -destination mock_ledger/mock_state_ledger.go -package mock_ledger -source types.go -typed
 type StateLedger interface {
 	StateAccessor
 
