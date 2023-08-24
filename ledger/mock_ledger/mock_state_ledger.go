@@ -475,17 +475,17 @@ func (mr *MockStateLedgerMockRecorder) GetEVMTransientState(addr, key interface{
 }
 
 // GetLogs mocks base method.
-func (m *MockStateLedger) GetLogs(arg0 types.Hash) []*types.EvmLog {
+func (m *MockStateLedger) GetLogs(arg0 types.Hash, arg1 uint64, arg2 *types.Hash) []*types.EvmLog {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetLogs", arg0)
+	ret := m.ctrl.Call(m, "GetLogs", arg0, arg1, arg2)
 	ret0, _ := ret[0].([]*types.EvmLog)
 	return ret0
 }
 
 // GetLogs indicates an expected call of GetLogs.
-func (mr *MockStateLedgerMockRecorder) GetLogs(arg0 interface{}) *gomock.Call {
+func (mr *MockStateLedgerMockRecorder) GetLogs(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLogs", reflect.TypeOf((*MockStateLedger)(nil).GetLogs), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetLogs", reflect.TypeOf((*MockStateLedger)(nil).GetLogs), arg0, arg1, arg2)
 }
 
 // GetNonce mocks base method.
