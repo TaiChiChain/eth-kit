@@ -19,7 +19,6 @@ package vm
 import (
 	"math/big"
 
-	"github.com/axiomesh/eth-kit/ledger"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/consensus"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -36,12 +35,12 @@ type ChainContext interface {
 }
 
 // NewEVMBlockContext creates a new context for use in the EVM.
-func NewEVMBlockContext(number uint64, timestamp uint64, db ledger.StateDB, ledger ledger.ChainLedger, admin string) BlockContext {
+func NewEVMBlockContext(number uint64, timestamp uint64, coinbase string, getHash GetHashFunc) BlockContext {
 	return BlockContext{
 		CanTransfer: CanTransfer,
 		Transfer:    Transfer,
-		GetHash:     GetHashFn(ledger),
-		Coinbase:    common.HexToAddress(admin),
+		GetHash:     getHash,
+		Coinbase:    common.HexToAddress(coinbase),
 		BlockNumber: new(big.Int).SetUint64(number),
 		Time:        timestamp,
 		Difficulty:  big.NewInt(0x2000),
@@ -59,25 +58,14 @@ func NewEVMTxContext(msg *Message) TxContext {
 	}
 }
 
-// GetHashFn returns a GetHashFunc which retrieves header hashes by number
-func GetHashFn(ledger ledger.ChainLedger) func(n uint64) common.Hash {
-	return func(n uint64) common.Hash {
-		hash := ledger.GetBlockHash(n)
-		if hash == nil {
-			return common.Hash{}
-		}
-		return common.BytesToHash(hash.Bytes())
-	}
-}
-
 // CanTransfer checks whether there are enough funds in the address' account to make a transfer.
 // This does not take the necessary gas in to account to make the transfer valid.
-func CanTransfer(db ledger.StateDB, addr common.Address, amount *big.Int) bool {
+func CanTransfer(db StateDB, addr common.Address, amount *big.Int) bool {
 	return db.GetEVMBalance(addr).Cmp(amount) >= 0
 }
 
 // Transfer subtracts amount from sender and adds amount to recipient using the given Db
-func Transfer(db ledger.StateDB, sender, recipient common.Address, amount *big.Int) {
+func Transfer(db StateDB, sender, recipient common.Address, amount *big.Int) {
 	db.SubEVMBalance(sender, amount)
 	db.AddEVMBalance(recipient, amount)
 }
