@@ -21,7 +21,6 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/axiomesh/eth-kit/ledger"
 	"github.com/ethereum/go-ethereum/common"
 	cmath "github.com/ethereum/go-ethereum/common/math"
 	"github.com/ethereum/go-ethereum/core"
@@ -195,7 +194,7 @@ type StateTransition struct {
 	msg          *Message
 	gasRemaining uint64
 	initialGas   uint64
-	state        ledger.StateDB
+	state        StateDB
 	evm          *EVM
 }
 

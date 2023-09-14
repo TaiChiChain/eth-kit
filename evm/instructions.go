@@ -821,7 +821,7 @@ func opSelfdestruct(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext
 	beneficiary := scope.Stack.pop()
 	balance := interpreter.evm.StateDB.GetEVMBalance(scope.Contract.Address())
 	interpreter.evm.StateDB.AddEVMBalance(beneficiary.Bytes20(), balance)
-	interpreter.evm.StateDB.SuisideEVM(scope.Contract.Address())
+	interpreter.evm.StateDB.SuicideEVM(scope.Contract.Address())
 	if tracer := interpreter.evm.Config.Tracer; tracer != nil {
 		tracer.CaptureEnter(SELFDESTRUCT, scope.Contract.Address(), beneficiary.Bytes20(), []byte{}, 0, balance)
 		tracer.CaptureExit([]byte{}, 0, nil)

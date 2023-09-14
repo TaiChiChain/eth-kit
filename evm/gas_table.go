@@ -470,7 +470,7 @@ func gasSelfdestruct(evm *EVM, contract *Contract, stack *Stack, mem *Memory, me
 		}
 	}
 
-	if !evm.StateDB.HasSuisideEVM(contract.Address()) {
+	if !evm.StateDB.HasSuicideEVM(contract.Address()) {
 		evm.StateDB.AddEVMRefund(params.SelfdestructRefundGas)
 	}
 	return gas, nil
